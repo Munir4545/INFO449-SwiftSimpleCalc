@@ -27,11 +27,111 @@ print("Welcome to the UW Calculator Playground")
 //: For this latter set of operations, it is safe to assume that `["count"]` (with no additional arguments) is 0, `["avg"]` is also 0, and `["fact"]` is 0. `["1", "fact"]` should return 1, and `["0", "fact"]` should also return 1. (Yes, 0-factorial is 1. True story.)
 //: 
 func calculate(_ args: [String]) -> Int {
-    return -1
+    var method = "";
+    var numbers : [Int] = []
+    for value in args {
+        if value == "+" || value == "-" ||
+            value == "*" || value == "/" ||
+            value == "%" || value == "count" || value == "avg" ||
+            value == "fact" {
+            method = value
+        } else {
+            let myInt = Int(value)
+            numbers.append(myInt ?? 0)
+        }
+    }
+    switch method {
+    
+    case "+":
+        return numbers[0] + numbers[1]
+    case "-":
+        return numbers[0] - numbers[1]
+    case "*":
+        return numbers[0] * numbers[1]
+    case "/":
+        return numbers[0] / numbers[1]
+    case "%":
+        return numbers[0] % numbers[1]
+    case "count":
+        return numbers.count
+    case "avg" :
+        if numbers.count == 0 {
+            return 0
+        }
+        var sum = 0
+        for number in numbers {
+            sum += number
+        }
+        return sum / numbers.count
+    case "fact":
+        if numbers.count == 0 {
+            return 0
+        } else if (numbers[0] < 2) {
+            return 1
+        }
+        var sum = 1
+        for number in 1...numbers[0] {
+            sum *= number
+        }
+        return sum
+    default:
+        return -1
+    }
 }
+calculate(["5", "fact"])
 
 func calculate(_ arg: String) -> Int {
-    return -1
+    let splitArg = arg.split(separator: " ")
+    var method = "";
+    var numbers : [Int] = []
+    for value in splitArg {
+        if value == "+" || value == "-" ||
+            value == "*" || value == "/" ||
+            value == "%" || value == "count" || value == "avg" ||
+            value == "fact" {
+            method = String(value)
+        } else {
+            let myInt = Int(value)
+            numbers.append(myInt ?? 0)
+        }
+    }
+    switch method {
+    
+    case "+":
+        return numbers[0] + numbers[1]
+    case "-":
+        return numbers[0] - numbers[1]
+    case "*":
+        return numbers[0] * numbers[1]
+    case "/":
+        return numbers[0] / numbers[1]
+    case "%":
+        return numbers[0] % numbers[1]
+    case "count":
+        return numbers.count
+    case "avg" :
+        if numbers.count == 0 {
+            return 0
+        }
+        var sum = 0
+        for number in numbers {
+            sum += number
+        }
+        return sum / numbers.count
+    case "fact":
+        if numbers.count == 0 {
+            return 0
+        } else if (numbers[0] < 2) {
+            return 1
+        }
+        var sum = 1
+        for number in 1...numbers[0] {
+            sum *= number
+        }
+        return sum
+    default:
+        return -1
+    }
 }
 
 //: Below this are the test expressions/calls to verify if your code is correct.
